@@ -36,14 +36,20 @@
         <td th:text="${inspector.firstName}"></td>
         <td th:text="${inspector.middleName}"></td>
         <td th:text="${inspector.employmentDate}"></td>
+        <td>
+            <a th:href="@{/edit-inspector/{id}(id=${inspector.id})}">Edit</a>
+        </td>
+        <td>
+            <a th:href="@{/delete-inspector/{id}(id=${inspector.id})}">Delete</a>
+        </td>
     </tr>
     </tbody>
 </table>
 
 
-    <div>
-        <a th:href="@{/save-inspector}" th:text="#{add.new.inspector}">Add new inspector</a>
-    </div>
+<div>
+    <a th:href="@{/save-inspector}" th:text="#{add.new.inspector}">Add new inspector</a>
+</div>
 
 </body>
 </html>
