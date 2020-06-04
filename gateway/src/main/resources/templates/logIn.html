@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="app-style.css">
+    <title>Title</title>
+    <script src="main.js"></script>
+</head>
+<body class="text-center" data-gr-c-s-loaded="true">
+<div class="lang">
+    <a href="/" th:text="#{header.home}"></a>
+</div>
+<div class="container">
+    <div class="name">
+        <th:block th:insert="fragments/language :: language"/>
+    </div>
+    <form class="form-signin" th:action="@{/login}" th:object="${user}" method="post">
+        <h3 class="h3 font-weight-normal name" th:text="#{login.form}">Login Form</h3>
+        <div th:if="${logout}">
+            <div class="alert alert-info" role="alert" th:text="#{logged.out}">Logged out.
+            </div>
+        </div>
+        <div th:if="${error}">
+            <div class="alert alert-danger" role="alert" th:text="#{invalid.credentials}">Invalid
+                credentials!
+            </div>
+        </div>
+
+        <div>
+            <input type="text" th:placeholder="#{placeholder.email}" required="" id="email" name="username"
+                   th:field="*{email}" class="form-control"/>
+        </div>
+        <div>
+            <input type="password" th:placeholder="#{placeholder.password}" required="" id="password"
+                   name="password" th:field="*{password}" class="form-control"/>
+        </div>
+        <div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" th:value="#{login}">Log in</button>
+            <a th:href="@{/auth/sign-up-individual}" th:text="#{register.individual}">Register individual</a>
+            <br/>
+            <a th:href="@{/auth/sign-up-legal-entity}" th:text="#{register.legal.entity}">Register legal</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

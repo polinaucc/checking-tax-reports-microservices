@@ -1,0 +1,106 @@
+.header-container{
+    display: inline-block;
+    width: 90vw;
+    margin-bottom: 10px;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+}
+h2, h3{
+    width: 90vw;
+    text-align: center;
+    display: inline-block;
+}
+
+.lang{
+    display: inline-block;
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+}
+
+.container {
+    align-items: center;
+    align-content: center;
+    margin-top: 25vh;
+    width: 350px;
+
+}
+
+.btn {
+    margin-top: 10px;
+}
+
+.name{
+    width: 100%;
+    max-width: 330px;
+    margin-right: 200px;
+    align-content: center;
+}
+
+.header {
+    background-image: url("https://previews.123rf.com/images/simpson33/simpson331705/simpson33170500122/79112293-office-desk-table-with-laptop-office-supplies-top-view-website-background-concept.jpg");
+    background-position: center;
+    position: relative;
+    height: 90vh;
+    width: 100vw;
+}
+
+.description {
+    left: 50%;
+    position: absolute;
+    top: 45%;
+    transform: translate(-50%, -55%);
+    text-align: center;
+}
+.description h1 {
+    color: #6ab446;
+}
+.description p {
+    color: black;
+    font-size: 1.3rem;
+    line-height: 1.5;
+}
+.description button {
+    border:1px solid #6ab446;
+    background:#6ab446;
+    border-radius: 0;
+    color:#fff;
+}
+.description button:hover {
+    border:1px solid #fff;
+    background:#fff;
+    color:#000;
+}
+
+.page-footer {
+    background-color: #222;
+    color: #ccc;
+    padding: 60px 0 30px;
+    height: 40vh;
+}
+.footer-copyright {
+    color: #666;
+    padding: 40px 0;
+}
+
+li{
+    list-style: none;
+    font-size: 14px;
+    display: inline-block;
+    padding: 10px;
+}
+
+ul{
+    display: inline-block;
+}
+
+.button-filter{
+    display: inline-block;
+    background-color:  #333333;
+    color: white;
+    border:  #333333;
+}

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<nav th:fragment="navigation">
+    <div class="my-nav">
+        <ul class="d-inline-flex nav">
+            <li class="nav-item ">
+                <a class="nav-link" th:href="@{/admin/claims}" th:text="#{navigation.claims}">Claims</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/inspectors}" th:text="#{navigation.inspectors}">Inspectors</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/admin/individuals}" th:text="#{navigation.individuals}">Individuals</a>
+            </li>
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="#">Legal entities</a>-->
+<!--            </li>-->
+<!--            <li class="nav-item">-->
+<!--                <a class="nav-link" href="#">Reports</a>-->
+<!--            </li>-->
+        </ul>
+    </div>
+</nav>
+</html>

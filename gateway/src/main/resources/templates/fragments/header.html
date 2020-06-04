@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<header class="my-header" th:fragment="header">
+    <th:block th:insert="fragments/language :: language"/>
+
+    <picture>
+        <source srcset="https://upload.wikimedia.org/wikipedia/commons/9/94/Report.png">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/9/94/Report.png" width="100 wh" height="100px"
+             alt="Picture">
+    </picture>
+    <ul class="d-inline-flex nav">
+        <li class="nav-item ">
+            <a class="nav-link" href="#" th:text="#{header.home}">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#" th:text="#{header.contacts}">Contacts</a>
+        </li>
+        <!--        <li class="nav-item">-->
+        <!--            <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Log in</a>-->
+        <!--        </li>-->
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/logout}" th:text="#{logout}">Log out</a>
+        </li>
+    </ul>
+</header>
+
+</html>

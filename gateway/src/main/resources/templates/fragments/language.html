@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="language">
+    <a th:href="@{''(lang=en)}" th:text="#{language.en}">EN</a>
+    |
+    <a th:href="@{''(lang=uk)}" th:text="#{language.ua}">UK</a>
+</div>
+</html>

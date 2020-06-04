@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reports</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="app-style.css">
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/WebSocketController.js"></script>
+</head>
+<body onload="webSocket.connect()">
+<div class="lang">
+    <a href="/" th:text="#{header.home}"></a>
+</div>
+<div class="header-container">
+    <h2 th:text="#{reports}">Reports</h2>
+</div>
+<div class="lang">
+    <th:block th:insert="fragments/language :: language"/>
+</div>
+<form class="header-container" th:action="@{/inspector-reports-filter}" method="get" th:object="${filterObj}">
+    <ul>
+        <li>
+            <input th:field="*{accepted}" id="accept" type="checkbox"/>
+            <label for="accept">ACCEPTED</label>
+        </li>
+        <li>
+            <input th:field="*{rejected}" id="reject" type="checkbox"/>
+            <label for="reject">REJECTED</label>
+        </li>
+        <li>
+            <input th:field="*{notChecked}" id="not_check" type="checkbox"/>
+            <label for="not_check">NOT CHECKED</label>
+        </li>
+    </ul>
+    <input class="button-filter" type="submit" value="Apply">
+</form>
+<table th:with="st=${accepted}" class="table table-hover">
+    <thead class="thead-dark">
+    <tr>
+        <th th:text="#{reports.id}"></th>
+        <th th:text="#{reports.client.name}"></th>
+        <th th:text="#{reports.date}"></th>
+        <th th:text="#{reports.comment}"></th>
+        <th th:text="#{reports.status}"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr id="response" th:each="report, iStat : ${reports}"
+        th:style="${iStat.odd}? 'font-weight: bold;'"
+        th:alt-title="${iStat.even}? 'even' : 'odd'">
+        <td th:text="${report.id}"></td>
+        <td th:text="${report.clientId}"></td>
+        <td th:text="${report.date}"></td>
+        <td th:text="${report.comment}"></td>
+        <td th:text="${report.status}"></td>
+        <td><a th:href="@{/reject-report/{id}(id=${report.id})}" th:text="${report.status==T(ua.polina.report_renoucement.Status).NOT_CHECKED} ? 'Reject':' '"></a></td>
+        <td><a th:href="@{/accept-report/{id}(id=${report.id})}" th:text="${report.status==T(ua.polina.report_renoucement.Status).NOT_CHECKED} ? 'Accept':' '"></a></td>
+        <td><a th:href="@{/info-report/{id}(id=${report.id})}" th:text="${report.status==T(ua.polina.report_renoucement.Status).REJECTED} ? 'Info':' '"></a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

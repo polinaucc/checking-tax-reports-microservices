@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="app-style.css">
+    <title>Title</title>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#"><strong>Checking reports</strong></a>
+    <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+            <a class="nav-link" href="/" th:text="#{header.home}">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li th:if="${session.role==null}" class="nav-item">
+            <a class="nav-link" th:href="@{/login}" th:text="#{login}">Log in</a>
+        </li>
+        <li th:if="${session.role==null}" class="nav-item">
+            <a class="nav-link" th:href="@{/register-individual}" th:text="#{register.individual}">Register
+                individual</a>
+        </li>
+        <li th:if="${session.role==null}" class="nav-item">
+            <a class="nav-link" th:href="@{/register-legal-entity}" th:text="#{register.legal.entity}">Register
+                legal entity</a>
+        </li>
+        <li th:if="${session.role!=null}" class="nav-item">
+            <a class="nav-link" th:href="@{/logout}" th:text="#{logout}">Log out</a>
+        </li>
+        <li th:if="${session.role=='CLIENT'}" class="nav-item">
+            <a class="nav-link" th:href="@{/create-new-report}" th:text="#{add.new.report}">Add report</a>
+        </li>
+        <li th:if="${session.role=='CLIENT'}" class="nav-item">
+            <a class="nav-link" th:href="@{/create-claim}" th:text="#{add.new.claim}">Add claim</a>
+        </li>
+        <li th:if="${session.role=='CLIENT'}" class="nav-item">
+            <a class="nav-link" th:href="@{/my-reports}" th:text="#{my.reports}">My Reports</a>
+        </li>
+        <li th:if="${session.role=='CLIENT'}" class="nav-item">
+            <a class="nav-link" th:href="@{/my-claims}" th:text="#{navigation.claims}">Claims</a>
+        </li>
+        <li th:if="${session.role=='INSPECTOR'}" class="nav-item">
+            <a class="nav-link" th:href="@{/inspector/individuals}" th:text="#{individuals}">Individuals</a>
+        </li>
+        <li th:if="${session.role=='INSPECTOR'}" class="nav-item">
+            <a class="nav-link" th:href="@{/inspector/legals}" th:text="#{my.legals}">Legal entities</a>
+        </li>
+        <li th:if="${session.role=='INSPECTOR'}" class="nav-item">
+            <a class="nav-link" th:href="@{/inspector-reports}" th:text="#{reports}">Reports</a>
+        </li>
+        <li th:if="${session.role=='ADMIN'}" class="nav-item">
+            <a class="nav-link" th:href="@{/individuals}" th:text="#{individuals}">Individuals</a>
+        </li>
+        <li th:if="${session.role=='ADMIN'}" class="nav-item">
+            <a class="nav-link" th:href="@{/legal-entities}" th:text="#{my.legals}">Legal entities</a>
+        </li>
+        <li th:if="${session.role=='ADMIN'}" class="nav-item">
+            <a class="nav-link" th:href="@{/save-inspector}" th:text="#{add.new.inspector}">Add new inspector</a>
+        </li>
+        <li th:if="${session.role=='ADMIN'}" class="nav-item">
+            <a class="nav-link" th:href="@{/claims}" th:text="#{claims}">Claims</a>
+        </li>
+        <li th:if="${session.role=='ADMIN'}" class="nav-item">
+            <a class="nav-link" th:href="@{/inspectors}" th:text="#{inspectors}">Inspectors</a>
+        </li>
+    </ul>
+    <div class="lang">
+        <th:block th:insert="fragments/language :: language"/>
+        <span th:text="${session.role}"></span>
+    </div>
+</nav>
+<header class="page-header header container-fluid">
+    <div class="description">
+        <h1 th:text="#{welcome}">Welcome to our Website!</h1>
+        <p th:text="#{description}">We are the best company that check your tax reports.We have high-educated inspectors
+            who do their job quickly.</p>
+        <button th:href="@{/register-individual}" class="btn btn-outline-secondary btn-lg">Register</button>
+    </div>
+</header>
+<footer class="page-footer">
+    <div>
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <h6 class="text-uppercase font-weight-bold">Additional Information</h6>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque interdum quam odio, quis placerat
+                    ante luctus eu. Sed aliquet dolor id sapien rutrum, id vulputate quam iaculis.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque interdum quam odio, quis placerat
+                    ante luctus eu. Sed aliquet dolor id sapien rutrum, id vulputate quam iaculis.</p>
+            </div>
+            <div class="col-lg-4 col-md-4 col-sm-12">
+                <h6 class="text-uppercase font-weight-bold">Contact</h6>
+                <p>1640 Riverside Drive, Hill Valley, California
+                    <br/>info@mywebsite.com
+                    <br/>+ 01 234 567 88
+                    <br/>+ 01 234 567 89</p>
+            </div>
+        </div>
+        <div class="footer-copyright text-center">© 2020 Copyright: MyWebsite.com</div>
+    </div>
+</footer>
+
+
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="app-style.css">
+    <title>Title</title>
+</head>
+<body>
+
+<div class="lang">
+    <a href="/" th:text="#{header.home}"></a>
+</div>
+<div class="container">
+    <div class="name">
+        <th:block th:insert="fragments/language :: language"/>
+    </div>
+        <form class="form-signin" th:action="@{/register-individual}" th:object="${sign}" method="post">
+            <h3 class="h3 font-weight-normal name" th:text="#{registration.form}">Registration form</h3>
+            <div th:if="${error != null}">
+                <p th:text="${error}">...</p>
+            </div>
+            <div th:if="${error2 != null}">
+                <p th:text="${error2}">...</p>
+            </div>
+            <div th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</div>
+            <div>
+                <input class="form-control" type="text" th:placeholder="#{placeholder.email}" required="" id="email" th:field="*{email}"/>
+            </div>
+            <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</div>
+            <div>
+                <input class="form-control" type="password" th:placeholder="#{placeholder.password}" required="" id="password" th:field="*{password}"/>
+            </div>
+            <div th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Surname Error</div>
+            <div>
+                <input class="form-control" type="text" th:placeholder="#{placeholder.surname}" required="" id="surname" th:field="*{surname}"/>
+            </div>
+            <div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name Error</div>
+            <div>
+                <input class="form-control" type="text" th:placeholder="#{placeholder.first.name}" required="" id="firstName" th:field="*{firstName}"/>
+            </div>
+            <div th:if="${#fields.hasErrors('secondName')}" th:errors="*{secondName}">Second name Error</div>
+            <div>
+                <input class="form-control" type="text" th:placeholder="#{placeholder.second.name}" required="" id="secondName" th:field="*{secondName}"/>
+            </div>
+            <div th:if="${#fields.hasErrors('passport')}" th:errors="*{passport}">Passport Error</div>
+            <div>
+                <input class="form-control" type="text" th:placeholder="#{placeholder.passport}" required="" id="passport" th:field="*{passport}"/>
+            </div>
+            <div th:if="${#fields.hasErrors('identCode')}" th:errors="*{identCode}">Identification code Error</div>
+            <div>
+                <input class="form-control" type="text" th:placeholder="#{placeholder.ident.code}" required="" id="identCode"
+                       th:field="*{identCode}"/>
+            </div>
+            <div th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Address Error</div>
+            <div>
+                <input class="form-control" type="text" th:placeholder="#{placeholder.address}" required="" id="address" th:field="*{address}"/>
+            </div>
+            <div th:if="${#fields.hasErrors('inspector')}" th:errors="*{address}">Inspector Error</div>
+            <div>
+                <!--              <input type="text" placeholder="Inspector" required="" id="inspector" th:field="*{inspectorId}"/>-->
+                <select class="form-control" id="inspectorOrder" name="inspector" th:field="*{inspectorId}">
+                    <option value="" th:text="#{select.inspector}">Select inspector</option>
+                    <option th:each="inspector : ${inspectors}"
+                            th:value="${inspector.id}" th:text="${inspector.firstName}"></option>
+                </select>
+            </div>
+
+            <div>
+                <button class="btn btn-lg btn-primary btn-block" type="submit" th:value="#{sign.up}">Sign in</button>
+                <a th:href="@{/auth/login}" th:text="#{login}">Log in</a>
+            </div>
+        </form>
+</div>
+</body>
+</html>

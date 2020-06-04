@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reports</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="app-style.css"><link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+                                                      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="app-style.css">
+</head>
+<body>
+<div class="lang">
+    <a href="/" th:text="#{header.home}"></a>
+</div>
+<div class="header-container">
+    <h2 th:text="#{reports}">Reports</h2>
+</div>
+<div class="lang">
+    <th:block th:insert="fragments/language :: language"/>
+</div>
+<table class="table table-hover">
+    <thead class="thead-dark">
+    <tr>
+        <th th:text="#{reports.id}"></th>
+        <th th:text="#{reports.date}"></th>
+        <th th:text="#{reports.comment}"></th>
+        <th th:text="#{reports.status}"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="rep: ${reports}">
+        <td th:text="${rep.id}"></td>
+        <td th:text="${rep.date}"></td>
+        <td th:text="${rep.comment}"></td>
+        <td th:text="${rep.status}"></td>
+        <td><a th:href="@{/edit/{id}(id=${rep.id})}">Edit</a></td>
+        <td>
+            <a th:href="@{/delete-report/{id}(id=${rep.id})}"
+               th:text="${rep.status==T(ua.polina.report_renoucement.Status).NOT_CHECKED} ? 'Delete':' '">Delete</a>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+<div>
+    <a th:href="@{/create-new-report}" th:text="#{create.report}">Create report</a>
+</div>
+</body>
+</html>

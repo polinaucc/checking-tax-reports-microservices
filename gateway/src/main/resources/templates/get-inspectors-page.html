@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Inspectors</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="app-style.css">
+</head>
+<body>
+<div class="lang">
+    <a href="/" th:text="#{header.home}"></a>
+</div>
+<div class="header-container">
+    <h2 th:text="#{inspectors}">Inspectors</h2>
+</div>
+<div class="lang">
+    <th:block th:insert="fragments/language :: language"/>
+</div>
+<table class="table table-hover">
+    <thead class="thead-dark">
+    <tr>
+        <th th:text="#{inspectors.id}"></th>
+        <th th:text="#{inspectors.surname}"></th>
+        <th th:text="#{inspectors.first.name}"></th>
+        <th th:text="#{inspectors.second.name}"></th>
+        <th th:text="#{inspectors.employment.date}"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="inspector, iStat : ${inspectors}"
+        th:style="${iStat.odd}? 'font-weight: bold;'"
+        th:alt-title="${iStat.even}? 'even' : 'odd'">
+        <td th:text="${inspector.id}"></td>
+        <td th:text="${inspector.lastName}"></td>
+        <td th:text="${inspector.firstName}"></td>
+        <td th:text="${inspector.middleName}"></td>
+        <td th:text="${inspector.employmentDate}"></td>
+    </tr>
+    </tbody>
+</table>
+
+
+    <div>
+        <a th:href="@{/save-inspector}" th:text="#{add.new.inspector}">Add new inspector</a>
+    </div>
+
+</body>
+</html>

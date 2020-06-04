@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Report</title>
+    <script src="/webjars/sockjs-client/sockjs.min.js"></script>
+    <script src="/webjars/stomp-websocket/stomp.min.js"></script>
+    <script src="/WebSocketController.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="app-style.css">
+</head>
+<body onload="webSocket.connect()" class="text-center" data-gr-c-s-loaded="true">
+<div class="lang">
+    <a href="/" th:text="#{header.home}"></a>
+</div>
+<div class="container">
+    <div class="name">
+        <th:block th:insert="fragments/language :: language"/>
+    </div>
+
+<!--        <form id="text" th:object="${report}" th:action="@{/create-new-report}" th:method="post">-->
+<!--            <h1 th:text="#{report}">Report</h1>-->
+<!--            <div class="form-group">-->
+<!--                <input th:label="#{write.comment}" type="text" placeholder="Comment" required="" id="comment"-->
+<!--                       th:field="*{comment}" class="form-control"/>-->
+<!--            </div>-->
+<!--            <button id="sendMessage" onclick="webSocket.sendMessage();">Send</button>-->
+<!--        </form>-->
+        <input type="text" id="text" placeholder="Write a message..."/>
+        <button id="sendMessage" onclick="webSocket.sendMessage();">Send</button>
+</div>
+</body>
+</html>

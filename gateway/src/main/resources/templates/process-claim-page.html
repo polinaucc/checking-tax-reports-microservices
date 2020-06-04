@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="app-style.css">
+</head>
+<body>
+<div class="lang">
+    <a href="/" th:text="#{header.home}"></a>
+</div>
+<div class="container">
+    <div class="name">
+        <th:block th:insert="fragments/language :: language"/>
+    </div>
+    <form th:action="@{/accept-claim}" th:object="${changeInsp}"  method="post">
+        <select th:label="#{choose.inspector}" th:href="@{/admin/accept-claim}" class="form-control" id="claimOrder"
+                name="claim" th:field="*{inspectorId} class="form-control"">
+            <option th:each="inspector : ${inspectors}"
+                    th:value="${inspector.id}" th:text="${inspector.toString()}"></option>
+        </select>
+
+        <div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit"
+                    th:value="#{change.inspector}">Change inspector</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
