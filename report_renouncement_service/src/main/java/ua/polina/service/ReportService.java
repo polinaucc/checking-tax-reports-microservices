@@ -46,6 +46,10 @@ public class ReportService {
         reportRepository.deleteById(id);
     }
 
+    public List<Report> getAll(){
+        return reportRepository.findAll();
+    }
+
     public Report update(Report report, Status status) {
         Long id = report.getId();
 

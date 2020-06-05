@@ -1,9 +1,11 @@
 package ua.polina.report_renoucement;
 
+import com.google.gson.Gson;
 import org.apache.http.client.methods.HttpGet;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -34,6 +36,9 @@ public class ReportController {
     @Autowired
     InspectorService inspectorService;
 
+    @Autowired
+    private SimpMessagingTemplate template;
+
     @GetMapping("/create-new-report")
     public String getNewReportPage(Model model, HttpServletRequest request) {
         String token = (String) request.getSession().getAttribute("token");
@@ -62,21 +67,26 @@ public class ReportController {
 
 
     @MessageMapping("/message")
-    @SendTo("/topic/mural")
+    //   @SendTo("/topic/mural")
     // @PostMapping("/create-new-report")
 //    public String addNewReport(@RequestBody ReportDto reqReport) {
-    public Report addNewReport(String reqReport, HttpServletRequest request) {
-
-        System.out.println(reqReport);
-        String token = (String) request.getSession().getAttribute("token");
+    public void addNewReport(String reqReport) {
+        Gson gson = new Gson();
+        GsonReport gsonReport = gson.fromJson(reqReport, GsonReport.class);
+        String comment = gsonReport.message;
+        String token = gsonReport.token;
+        System.out.println(comment);
+        System.out.println(token);
         HttpGet req = new HttpGet();
         req.setHeader("Authorization", String.format("%s%s", "Bearer ", token));
         if (authService.isClient(token)) {
             Long userId = authService.getCurrentUser(token);
             Long clientId = individualService.getCurrentClient(userId);
-            return reportRenouncementService.addNewReport(new ApiReport(new ReportDto(reqReport), clientId));
+            Long inspectorId = individualService.getInspectorByClient(clientId);
+            Report report = reportRenouncementService.addNewReport(new ApiReport(new ReportDto(comment), clientId));
+            this.template.convertAndSend("/topic/mural/"+inspectorId, report);
+            //  return reportRenouncementService.getAllReports();
         }
-        return null;
     }
 
 //    @PostMapping("/create-new-report")
@@ -242,4 +252,9 @@ public class ReportController {
         model.addAttribute("renouncements", reportRenouncementService.getRenouncementByReport(report.getId()));
         return "get-info";
     }
+}
+
+class GsonReport {
+    String token;
+    String message;
 }

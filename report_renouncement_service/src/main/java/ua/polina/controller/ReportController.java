@@ -41,8 +41,6 @@ public class ReportController {
     @ResponseBody
     public void deleteReport(@PathVariable("id") Long id){
         reportService.deleteById(id);
-
-
     }
 
     @PostMapping("/update/{id}")
@@ -87,6 +85,12 @@ public class ReportController {
     @ResponseBody
     public List<Report> getReportByClientId(@RequestBody Long clientId) {
         return reportService.getByClient(clientId);
+    }
+
+    @PostMapping
+    @ResponseBody
+    public List<Report> getAllReports(){
+        return  reportService.getAll();
     }
 
 }

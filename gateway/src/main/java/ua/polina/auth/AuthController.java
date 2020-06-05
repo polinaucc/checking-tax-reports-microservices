@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import ua.polina.client.IndividualService;
+import ua.polina.inspector.Inspector;
+import ua.polina.inspector.InspectorService;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -16,6 +19,12 @@ public class AuthController {
     @Autowired
     AuthService authService;
 
+    @Autowired
+    IndividualService individualService;
+
+
+    @Autowired
+    InspectorService inspectorService;
 
     @GetMapping("/login")
     public String login(Model model) {
@@ -33,8 +42,7 @@ public class AuthController {
             model.addAttribute("logout", "Logged out");
             model.addAttribute("user", new User());
             return "login";
-        }
-        catch (FeignException.FeignClientException e){
+        } catch (FeignException.FeignClientException e) {
             return "wrong-page";
         }
     }
@@ -52,8 +60,16 @@ public class AuthController {
                 req.setHeader("Authorization", String.format("%s%s", "Bearer ", token));
                 if (authService.isClient(token)) {
                     httpSession.setAttribute("role", "CLIENT");
+                    Long userId = authService.getCurrentUser(token);
+                    System.out.println("userId: " + userId);
+                    Long clientId = individualService.getCurrentClient(userId);
+                    Long inspectorId = individualService.getInspectorByClient(clientId);
+                    httpSession.setAttribute("cl_inspector_id", inspectorId);
                 } else if (authService.isInspector(token)) {
                     httpSession.setAttribute("role", "INSPECTOR");
+                    Long userId = authService.getCurrentUser(token);
+                    Inspector inspector = inspectorService.getInspectorByUserId(userId);
+                    httpSession.setAttribute("cl_inspector_id", inspector.getId());
                 } else if (authService.isAdmin(token)) {
                     httpSession.setAttribute("role", "ADMIN");
                 }

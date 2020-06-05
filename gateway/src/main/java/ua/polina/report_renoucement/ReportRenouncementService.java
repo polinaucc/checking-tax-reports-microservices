@@ -39,6 +39,10 @@ public interface ReportRenouncementService {
     @ResponseBody
     void deleteReport(@PathVariable("id") Long id);
 
+    @PostMapping
+    @ResponseBody
+    List<Report> getAllReports();
+
     @PostMapping("/renouncement-by-report")
     @ResponseBody
     List<Renouncement> getRenouncementByReport(@RequestBody Long reportId);

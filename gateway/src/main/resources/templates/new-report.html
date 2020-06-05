@@ -19,16 +19,18 @@
         <th:block th:insert="fragments/language :: language"/>
     </div>
 
-<!--        <form id="text" th:object="${report}" th:action="@{/create-new-report}" th:method="post">-->
-<!--            <h1 th:text="#{report}">Report</h1>-->
-<!--            <div class="form-group">-->
-<!--                <input th:label="#{write.comment}" type="text" placeholder="Comment" required="" id="comment"-->
-<!--                       th:field="*{comment}" class="form-control"/>-->
-<!--            </div>-->
-<!--            <button id="sendMessage" onclick="webSocket.sendMessage();">Send</button>-->
-<!--        </form>-->
-        <input type="text" id="text" placeholder="Write a message..."/>
-        <button id="sendMessage" onclick="webSocket.sendMessage();">Send</button>
+    <!--        <form id="text" th:object="${report}" th:action="@{/create-new-report}" th:method="post">-->
+<!--                <h1 th:text="#{report}">Report</h1>-->
+    <!--            <div class="form-group">-->
+    <!--                <input th:label="#{write.comment}" type="text" placeholder="Comment" required="" id="comment"-->
+    <!--                       th:field="*{comment}" class="form-control"/>-->
+    <!--            </div>-->
+    <!--            <button id="sendMessage" onclick="webSocket.sendMessage();">Send</button>-->
+    <!--        </form>-->
+    <h1 th:text="#{report}">Report</h1>
+    <input id="text2" type="text" th:value="${session.token}"/>
+    <input type="text" id="text" class="form-control" th:placeholder="#{reports.comment}"/>
+    <button class="btn btn-lg btn-primary btn-block" th:text="#{add.new.report}" id="sendMessage" onclick="webSocket.sendMessage();">Send</button>
 </div>
 </body>
 </html>

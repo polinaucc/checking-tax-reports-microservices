@@ -11,6 +11,7 @@
     <script src="/WebSocketController.js"></script>
 </head>
 <body onload="webSocket.connect()">
+<input id="text3" th:value="${session.cl_inspector_id}">
 <div class="lang">
     <a href="/" th:text="#{header.home}"></a>
 </div>
@@ -37,28 +38,31 @@
     </ul>
     <input class="button-filter" type="submit" value="Apply">
 </form>
-<table th:with="st=${accepted}" class="table table-hover">
+<table class="table table-hover">
     <thead class="thead-dark">
     <tr>
         <th th:text="#{reports.id}"></th>
-        <th th:text="#{reports.client.name}"></th>
+        <th th:text="#{id}"></th>
         <th th:text="#{reports.date}"></th>
         <th th:text="#{reports.comment}"></th>
         <th th:text="#{reports.status}"></th>
     </tr>
     </thead>
     <tbody>
-    <tr id="response" th:each="report, iStat : ${reports}"
-        th:style="${iStat.odd}? 'font-weight: bold;'"
-        th:alt-title="${iStat.even}? 'even' : 'odd'">
+    <tr id="response" th:each="report, iStat : ${reports}">
         <td th:text="${report.id}"></td>
         <td th:text="${report.clientId}"></td>
         <td th:text="${report.date}"></td>
         <td th:text="${report.comment}"></td>
         <td th:text="${report.status}"></td>
-        <td><a th:href="@{/reject-report/{id}(id=${report.id})}" th:text="${report.status==T(ua.polina.report_renoucement.Status).NOT_CHECKED} ? 'Reject':' '"></a></td>
-        <td><a th:href="@{/accept-report/{id}(id=${report.id})}" th:text="${report.status==T(ua.polina.report_renoucement.Status).NOT_CHECKED} ? 'Accept':' '"></a></td>
-        <td><a th:href="@{/info-report/{id}(id=${report.id})}" th:text="${report.status==T(ua.polina.report_renoucement.Status).REJECTED} ? 'Info':' '"></a></td>
+        <td><a th:href="@{/reject-report/{id}(id=${report.id})}"
+               th:text="${report.status==T(ua.polina.report_renoucement.Status).NOT_CHECKED} ? 'Reject':' '"></a></td>
+        <td><a th:href="@{/accept-report/{id}(id=${report.id})}"
+               th:text="${report.status==T(ua.polina.report_renoucement.Status).NOT_CHECKED} ? 'Accept':' '"></a></td>
+        <td><a th:href="@{/info-report/{id}(id=${report.id})}"
+               th:text="${report.status==T(ua.polina.report_renoucement.Status).REJECTED} ? 'Info':' '"></a></td>
+    </tr>
+    <tr id="id">
     </tr>
     </tbody>
 </table>
