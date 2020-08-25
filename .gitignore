@@ -1,10 +1,8 @@
 /.idea
 
-/*/.idea
-/*/.mvn
-/*/*.iml
-/*/target
-/*/mvnw
-/*/mvnw.cmd
-
-/eureka_server/.mvn/wrapper/maven-wrapper.jar
+**/.idea
+**/.mvn
+**/*.iml
+**/target/
+**/mvnw
+**/mvnw.cmd
