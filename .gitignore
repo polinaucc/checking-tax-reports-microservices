@@ -1,8 +1,9 @@
 /.idea
 
 **/.idea
-**/.mvn
+**/.mvn/wrapper/
 **/*.iml
 **/target/
 **/mvnw
 **/mvnw.cmd
+
