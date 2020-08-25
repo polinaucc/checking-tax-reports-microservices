@@ -17,8 +17,8 @@
         <th:block th:insert="fragments/language :: language"/>
     </div>
     <form th:action="@{/accept-claim}" th:object="${changeInsp}"  method="post">
-        <select th:label="#{choose.inspector}" th:href="@{/admin/accept-claim}" class="form-control" id="claimOrder"
-                name="claim" th:field="*{inspectorId} class="form-control"">
+        <select  class="form-control" th:label="#{choose.inspector}" th:href="@{/admin/accept-claim}" id="claimOrder"
+                name="claim" th:field="*{inspectorId}">
             <option th:each="inspector : ${inspectors}"
                     th:value="${inspector.id}" th:text="${inspector.toString()}"></option>
         </select>

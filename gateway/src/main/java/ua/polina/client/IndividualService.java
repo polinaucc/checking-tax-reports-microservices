@@ -70,4 +70,12 @@ public interface IndividualService {
     @PostMapping("/insp-clients")
     @ResponseBody
     List<Client> getClientByInspector(@RequestBody Long inspectorId);
+
+    @PostMapping("/get-individual-by-client-id")
+    @ResponseBody
+    Individual getByClientId(@RequestBody Long clientId);
+
+    @PostMapping("/get-legal-by-client-id")
+    @ResponseBody
+    LegalEntity geLegaltByClientId(@RequestBody Long clientId);
 }

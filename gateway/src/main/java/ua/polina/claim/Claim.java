@@ -11,4 +11,5 @@ public class Claim {
     private Status status;
     private Long clientId;
     private Long inspectorId;
+
 }

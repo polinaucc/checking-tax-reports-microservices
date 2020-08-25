@@ -78,4 +78,8 @@ public class LegalEntityService {
     public List<LegalEntity> getLegalsByInspector(Long inspectorId){
         return legalEntityRepository.findByInspector(inspectorId);
     }
+
+    public Optional<LegalEntity> getByClientId(Long id){
+        return legalEntityRepository.findByClientId(id);
+    }
 }

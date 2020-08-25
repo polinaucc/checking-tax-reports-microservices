@@ -48,19 +48,19 @@
     <tr th:each="claim, iStat : ${claims}"
         th:style="${iStat.odd}? 'font-weight: bold;'"
         th:alt-title="${iStat.even}? 'even' : 'odd'">
-        <td th:text="${claim.id}"></td>
-        <td th:text="${claim.clientId}"></td>
-        <td th:text="${claim.inspectorId}"></td>
+        <td th:text="${claim.claimId}"></td>
+        <td th:text="${claim.clientName}"></td>
+        <td th:text="${claim.inspector}"></td>
         <td th:text="${claim.reason}"></td>
         <td th:text="${claim.status}">
 
         </td>
         <td>
-            <a th:href="@{/reject-claim/{id}(id=${claim.id})}"
+            <a th:href="@{/reject-claim/{id}(id=${claim.claimId})}"
                th:text="${claim.status==T(ua.polina.claim.Status).NOT_CHECKED} ? 'Reject':' '"></a>
         </td>
         <td>
-            <a th:href="@{/accept-claim/{id}(id=${claim.id})}"
+            <a th:href="@{/accept-claim/{id}(id=${claim.claimId})}"
                th:text="${claim.status==T(ua.polina.claim.Status).NOT_CHECKED} ? 'Accept':' '">Accept</a>
         </td>
     </tr>

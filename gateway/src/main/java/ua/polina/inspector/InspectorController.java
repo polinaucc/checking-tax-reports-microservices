@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ua.polina.auth.AuthService;
 import ua.polina.auth.User;
@@ -93,8 +94,20 @@ public class InspectorController {
 
     @GetMapping("/inspectors")
     public String getAllInspectors(Model model, HttpServletRequest request){
-        List<Inspector> inspectors = inspectorService.getInspectors();
-        model.addAttribute("inspectors", inspectors);
-        return "get-inspectors-page";
+        String token = (String) request.getSession().getAttribute("token");
+        HttpGet req = new HttpGet();
+        req.setHeader("Authorization", String.format("%s%s", "Bearer ", token));
+        if (authService.isAdmin(token)) {
+            List<Inspector> inspectors = inspectorService.getInspectors();
+            model.addAttribute("inspectors", inspectors);
+            return "get-inspectors-page";
+        }
+        else return "access-denied";
+    }
+
+    @GetMapping("delete-inspector/{id}")
+    public String deleteInspector(@PathVariable("id") Long id){
+        inspectorService.deleteById(id);
+        return "redirect:/inspectors";
     }
 }

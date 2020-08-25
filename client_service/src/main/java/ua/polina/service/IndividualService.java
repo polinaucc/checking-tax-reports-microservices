@@ -56,6 +56,10 @@ public class IndividualService {
         return individualRepository.findByInspector(inspectorId);
     }
 
+    public Optional<Individual> getByClientId(Long id){
+        return individualRepository.findByClientId(id);
+    }
+
     public Optional<Individual> getByPassport(String passport) {
         return individualRepository.findByPassport(passport);
     }

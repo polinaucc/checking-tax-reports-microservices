@@ -101,6 +101,23 @@ public class ClientController {
         return legalEntityService.saveNewLegalEntity(apiRequest.getDto(), apiRequest.getUserId());
     }
 
+    @PostMapping("/get-individual-by-client-id")
+    @ResponseBody
+    public Individual getByClientId(@RequestBody Long clientId) {
+        return individualService.getByClientId(clientId)
+                .orElseThrow(()->new IllegalArgumentException("No individual"));
+    }
+
+    @PostMapping("/get-legal-by-client-id")
+    @ResponseBody
+    public LegalEntity geLegaltByClientId(@RequestBody Long clientId) {
+        return legalEntityService.getByClientId(clientId)
+                .orElseThrow(()->new IllegalArgumentException("No individual"));
+    }
+
+
+
+
     @PostMapping("/get-inspector-by-client")
     @ResponseBody
     public Long getInspectorByClient(@RequestBody Long clienId) {

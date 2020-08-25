@@ -12,4 +12,9 @@ public class Inspector {
     private String lastName;
     private LocalDate employmentDate;
     private Long userId;
+
+    @Override
+    public String toString() {
+        return firstName + " " + middleName + " " + lastName;
+    }
 }

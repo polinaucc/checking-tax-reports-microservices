@@ -17,4 +17,5 @@ public interface LegalEntityRepository extends JpaRepository<LegalEntity, Long> 
     List<LegalEntity> findByInspector(Long inspectorId);
     Boolean existsByEdrpou(String edrpou);
     Boolean existsByMfo(String mfo);
+    Optional<LegalEntity> findByClientId(Long clientId);
 }

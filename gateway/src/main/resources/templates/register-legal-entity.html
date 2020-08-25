@@ -38,7 +38,7 @@
             </div>
             <div th:if="${#fields.hasErrors('mfo')}" th:errors="*{mfo}">Mfo Error</div>
             <div>
-                <input type="text" th:placeholder="#{placeholder.mfo}" required="" id="mfo" th:field="*{mfo}" />
+                <input class="form-control" type="text" th:placeholder="#{placeholder.mfo}" required="" id="mfo" th:field="*{mfo}" />
             </div>
             <div th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Address Error</div>
             <div>

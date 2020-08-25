@@ -11,4 +11,9 @@ public class LegalEntity {
     private String mfo;
     private String address;
     private Long clientId;
+
+    @Override
+    public String toString() {
+        return name;
+    }
 }

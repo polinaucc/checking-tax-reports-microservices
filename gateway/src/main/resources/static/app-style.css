@@ -27,7 +27,6 @@ h2, h3{
     align-content: center;
     margin-top: 25vh;
     width: 350px;
-
 }
 
 .btn {
@@ -82,6 +81,7 @@ h2, h3{
     padding: 60px 0 30px;
     height: 40vh;
 }
+
 .footer-copyright {
     color: #666;
     padding: 40px 0;

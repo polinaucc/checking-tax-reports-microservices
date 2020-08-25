@@ -13,4 +13,10 @@ public class Individual {
     private String passport;
     private String identCode;
     private Long clientId;
+
+
+    @Override
+    public String toString() {
+        return firstName + " " + middleName + " " + lastName;
+    }
 }

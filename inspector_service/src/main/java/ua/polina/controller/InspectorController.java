@@ -44,4 +44,10 @@ public class InspectorController {
         return inspectorService.getByUserId(userId);
     }
 
+    @ResponseBody
+    @PostMapping("/delete/{id}")
+    public void deleteById(@PathVariable("id") Long id){
+        inspectorService.delete(id);
+    }
+
 }

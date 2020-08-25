@@ -77,7 +77,7 @@
         <h1 th:text="#{welcome}">Welcome to our Website!</h1>
         <p th:text="#{description}">We are the best company that check your tax reports.We have high-educated inspectors
             who do their job quickly.</p>
-        <button th:href="@{/register-individual}" class="btn btn-outline-secondary btn-lg">Register</button>
+        <button th:action="@{/register-individual}" class="btn btn-outline-secondary btn-lg" th:text="#{registration.form}">Register</button>
     </div>
 </header>
 <footer class="page-footer">

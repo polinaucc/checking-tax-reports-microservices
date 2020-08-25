@@ -21,6 +21,7 @@
     <thead class="thead-dark">
     <tr>
         <th th:text="#{claims.id}"></th>
+        <th th:text="#{claims.client}"></th>
         <th th:text="#{claims.inspector}"></th>
         <th th:text="#{claims.reason}"></th>
         <th th:text="#{claims.status}"></th>
@@ -30,8 +31,9 @@
     <tr th:each="claim, iStat : ${claims}"
         th:style="${iStat.odd}? 'font-weight: bold;'"
         th:alt-title="${iStat.even}? 'even' : 'odd'">
-        <td th:text="${claim.id}"></td>
-        <td th:text="${claim.inspectorId}"></td>
+        <td th:text="${claim.claimId}"></td>
+        <td th:text="${claim.inspector}"></td>
+        <td th:text="${claim.clientName}"></td>
         <td th:text="${claim.reason}"></td>
         <td th:text="${claim.status}"></td>
     </tr>

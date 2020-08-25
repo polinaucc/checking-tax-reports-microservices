@@ -30,6 +30,10 @@ public class InspectorService {
 
     }
 
+    public void delete(Long id){
+        inspectorRepository.deleteById(id);
+    }
+
     public Optional<Inspector> getById(Long id) {
         return inspectorRepository.findById(id);
     }

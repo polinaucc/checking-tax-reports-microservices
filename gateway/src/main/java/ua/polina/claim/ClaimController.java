@@ -10,13 +10,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import ua.polina.auth.AuthService;
-import ua.polina.client.Client;
-import ua.polina.client.IndividualService;
+import ua.polina.client.*;
 import ua.polina.inspector.Inspector;
 import ua.polina.inspector.InspectorService;
 import ua.polina.report_renoucement.FilterObj;
-import ua.polina.report_renoucement.Status;
-import ua.polina.report_renoucement.StatusApi;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
@@ -70,7 +67,20 @@ public class ClaimController {
             Long userId = authService.getCurrentUser(token);
             Long clientId = individualService.getCurrentClient(userId);
             List<Claim> claims = claimService.getClaimsPage(clientId);
-            model.addAttribute("claims", claims);
+            List<ClaimOutputDto> claimsOut = new ArrayList<>();
+            for (Claim cl : claims) {
+                Inspector inspector = inspectorService.getByInspectorById(cl.getInspectorId());
+                Client client = individualService.getClientById(cl.getClientId());
+                if (client.getClientType() == ClientType.INDIVIDUAL) {
+                    Individual individual = individualService.getByClientId(client.getId());
+                    claimsOut.add(new ClaimOutputDto(cl.getId(), individual.toString(), inspector, cl.getReason(), cl.getStatus()));
+                }
+                if (client.getClientType() == ClientType.LEGAL_ENTITY) {
+                    LegalEntity legalEntity = individualService.geLegaltByClientId(client.getId());
+                    claimsOut.add(new ClaimOutputDto(cl.getId(), legalEntity.toString(), inspector, cl.getReason(), cl.getStatus()));
+                }
+            }
+            model.addAttribute("claims", claimsOut);
             return "get-claims-page";
         } else return "access-denied";
     }
@@ -82,7 +92,20 @@ public class ClaimController {
         req.setHeader("Authorization", String.format("%s%s", "Bearer ", token));
         if (authService.isAdmin(token)) {
             List<Claim> claims = claimService.getClaims();
-            model.addAttribute("claims", claims);
+            List<ClaimOutputDto> claimsOut = new ArrayList<>();
+            for (Claim cl : claims) {
+                Inspector inspector = inspectorService.getByInspectorById(cl.getInspectorId());
+                Client client = individualService.getClientById(cl.getClientId());
+                if (client.getClientType() == ClientType.INDIVIDUAL) {
+                    Individual individual = individualService.getByClientId(client.getId());
+                    claimsOut.add(new ClaimOutputDto(cl.getId(), individual.toString(), inspector, cl.getReason(), cl.getStatus()));
+                }
+                if (client.getClientType() == ClientType.LEGAL_ENTITY) {
+                    LegalEntity legalEntity = individualService.geLegaltByClientId(client.getId());
+                    claimsOut.add(new ClaimOutputDto(cl.getId(), legalEntity.toString(), inspector, cl.getReason(), cl.getStatus()));
+                }
+            }
+            model.addAttribute("claims", claimsOut);
             model.addAttribute("filterObj", new FilterObj());
             return "get-claims-page-admin";
         } else return "access-denied";
@@ -136,6 +159,7 @@ public class ClaimController {
         req.setHeader("Authorization", String.format("%s%s", "Bearer ", token));
         if (authService.isAdmin(token)) {
             List<Claim> claims = new ArrayList<>();
+            List<ClaimOutputDto> claimsOut = new ArrayList<>();
             if (filterObj.accepted) {
                 claims.addAll(claimService.getClaimsByStatus(ua.polina.claim.Status.ACCEPTED));
             }
@@ -145,9 +169,22 @@ public class ClaimController {
             if (filterObj.rejected) {
                 claims.addAll(claimService.getClaimsByStatus(ua.polina.claim.Status.REJECTED));
             }
+            for (Claim cl : claims) {
+                Inspector inspector = inspectorService.getByInspectorById(cl.getInspectorId());
+                Client client = individualService.getClientById(cl.getClientId());
+                if (client.getClientType() == ClientType.INDIVIDUAL) {
+                    Individual individual = individualService.getByClientId(client.getId());
+                    claimsOut.add(new ClaimOutputDto(cl.getId(), individual.toString(), inspector, cl.getReason(), cl.getStatus()));
+                }
+                if (client.getClientType() == ClientType.LEGAL_ENTITY) {
+                    LegalEntity legalEntity = individualService.geLegaltByClientId(client.getId());
+                    claimsOut.add(new ClaimOutputDto(cl.getId(), legalEntity.toString(), inspector, cl.getReason(), cl.getStatus()));
+                }
+
+            }
             if (!filterObj.rejected && !filterObj.notChecked && !filterObj.accepted)
                 return "redirect:/claims";
-            model.addAttribute("claims", claims);
+            model.addAttribute("claims", claimsOut);
             return "get-claims-page-admin";
         } else return "access-denied";
     }

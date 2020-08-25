@@ -57,7 +57,7 @@
             <div>
                 <input class="form-control" type="text" th:placeholder="#{placeholder.address}" required="" id="address" th:field="*{address}"/>
             </div>
-            <div th:if="${#fields.hasErrors('inspector')}" th:errors="*{address}">Inspector Error</div>
+            <div th:if="${#fields.hasErrors('inspectorId')}" th:errors="*{address}">Inspector Error</div>
             <div>
                 <!--              <input type="text" placeholder="Inspector" required="" id="inspector" th:field="*{inspectorId}"/>-->
                 <select class="form-control" id="inspectorOrder" name="inspector" th:field="*{inspectorId}">

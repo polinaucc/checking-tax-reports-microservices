@@ -37,9 +37,6 @@
         <td th:text="${inspector.middleName}"></td>
         <td th:text="${inspector.employmentDate}"></td>
         <td>
-            <a th:href="@{/edit-inspector/{id}(id=${inspector.id})}">Edit</a>
-        </td>
-        <td>
             <a th:href="@{/delete-inspector/{id}(id=${inspector.id})}">Delete</a>
         </td>
     </tr>
